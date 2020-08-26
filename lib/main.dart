@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'MyList App',
+      title: 'MyList  App',
       routes: {
         AppRoutes.home: (context) => HomeScreen(),
         AppRoutes.edit: (context) => Edit(),
