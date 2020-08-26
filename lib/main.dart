@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:my_list_score/config/routes.dart';
+// import 'package:my_list_score/presentation/for_passing.dart';
+import 'package:my_list_score/presentation/home_screen.dart';
+import 'package:my_list_score/presentation/edit.dart';
+import 'package:my_list_score/presentation/show_score.dart';
 
 void main() {
   runApp(MyApp());
@@ -8,63 +13,28 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      debugShowCheckedModeBanner: false,
+      title: 'MyList App',
+      routes: {
+        AppRoutes.home: (context) => HomeScreen(),
+        AppRoutes.edit: (context) => Edit(),
+        AppRoutes.showScore: (context) => ShowScore(),
+      },
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: MyHomePage(title: 'My List'),
+      // onGenerateRoute: _registerRouteWithParameters,
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  MyHomePage({Key key, this.title}) : super(key: key);
-  final String title;
-
-  @override
-  _MyHomePageState createState() => _MyHomePageState();
-}
-
-class MyList {
-  String _name;
-  int _score;
-  MyList(this._name, this._score);
-}
-
-class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
-
-  void _incrementCounter() {
-    setState(() {
-      _counter++;
-    });
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
-      body: Center(
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Text(
-              'You have pushed the button this many times:',
-            ),
-            Text(
-              '$_counter',
-              style: Theme.of(context).textTheme.headline4,
-            ),
-          ],
-        ),
-      ),
-      floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
-        tooltip: 'Increment',
-        child: Icon(Icons.add),
-      ),
-    );
-  }
-}
+// Route _registerRouteWithParameters(RouteSettings settings) {
+//   if (settings.name == AppRoutes.edit) {
+//     return MaterialPageRoute(builder: (context) {
+//       ForDisplay parameter = settings.arguments;
+//       return PageDisplayText(
+//         title: parameter.text,
+//       );
+//     });
+//   }
+// }
