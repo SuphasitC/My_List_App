@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
-import 'package:my_list_score/presentation/for_passing.dart';
 
 class Person {
   final String _name;
@@ -9,7 +8,7 @@ class Person {
 }
 
 class HomeScreen extends StatelessWidget {
-  List<Person> mock = [
+  final List<Person> people = [
     Person("Em", 100),
     Person("Aff", 90),
     Person("Yong", 80),
@@ -21,45 +20,21 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text("My List"),
       ),
-      body: ListView(
-        children: <Widget>[
-          Card(
-              child: ListTile(
-            title: Text(mock[0]._name),
-            trailing: Text(
-              mock[0]._score.toString(),
-              textScaleFactor: 2.0,
-            ),
-            onTap: () => {Navigator.of(context).pushNamed(AppRoutes.showScore)},
-          )),
-          Card(
-              child: ListTile(
-            title: Text(mock[1]._name),
-            trailing: Text(
-              mock[1]._score.toString(),
-              textScaleFactor: 2.0,
-            ),
-            onTap: () => {Navigator.of(context).pushNamed(AppRoutes.showScore)},
-          )),
-          Card(
-              child: ListTile(
-            title: Text(mock[2]._name),
-            trailing: Text(
-              mock[2]._score.toString(),
-              textScaleFactor: 2.0,
-            ),
-            onTap: () => {Navigator.of(context).pushNamed(AppRoutes.showScore)},
-          )),
-          Card(
-              child: ListTile(
-            title: Text(mock[3]._name),
-            trailing: Text(
-              mock[3]._score.toString(),
-              textScaleFactor: 2.0,
-            ),
-            onTap: () => {Navigator.of(context).pushNamed(AppRoutes.showScore)},
-          )),
-        ],
+      body: ListView.builder(
+        itemCount: people.length,
+        itemBuilder: (context, index) => Card(
+            child: ListTile(
+          title: Text(
+            people[index]._name,
+            style: TextStyle(fontSize: 22.0),
+          ),
+          trailing: Text(
+            people[index]._score.toString(),
+            textScaleFactor: 2.0,
+            style: TextStyle(fontWeight: FontWeight.bold),
+          ),
+          onTap: () => {Navigator.of(context).pushNamed(AppRoutes.showScore)},
+        )),
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {Navigator.of(context).pushNamed(AppRoutes.edit)},

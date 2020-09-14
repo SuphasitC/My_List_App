@@ -8,21 +8,7 @@ class ShowScore extends StatelessWidget {
       body: Center(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: <Widget>[
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: <Widget>[Text("Aff"), Text("90")],
-            ),
-            Column(
-              children: <Widget>[
-                Text("Next Person >"),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                  children: <Widget>[Text("Em"), Text("100")],
-                )
-              ],
-            )
-          ],
+          children: <Widget>[],
         ),
       ),
     );
