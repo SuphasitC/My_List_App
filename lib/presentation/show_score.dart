@@ -1,7 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
+import 'package:my_list_score/presentation/home_screen.dart';
 
 class ShowScore extends StatelessWidget {
+  final String name;
+  final String score;
+  const ShowScore({
+    Key key,
+    @required this.name,
+    @required this.score,
+  }) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -9,7 +17,10 @@ class ShowScore extends StatelessWidget {
           padding: const EdgeInsets.only(top: 120.0),
           child: FloatingActionButton(
             child: Icon(Icons.edit),
-            onPressed: () => {Navigator.of(context).pushNamed(AppRoutes.edit)},
+            onPressed: () => {
+              Navigator.of(context).pushNamed(AppRoutes.edit,
+                  arguments: Person(this.name, int.parse(score)))
+            },
             backgroundColor: Colors.orange,
           ),
         ),
@@ -26,7 +37,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       left: 30,
                       bottom: 30,
-                      child: Text('2  Aff',
+                      child: Text(this.name,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,
@@ -35,7 +46,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       right: 30,
                       bottom: 30,
-                      child: Text('90',
+                      child: Text(this.score,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,

@@ -33,7 +33,10 @@ class HomeScreen extends StatelessWidget {
             textScaleFactor: 2.0,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
-          onTap: () => {Navigator.of(context).pushNamed(AppRoutes.showScore)},
+          onTap: () => {
+            Navigator.of(context)
+                .pushNamed(AppRoutes.showScore, arguments: people[index])
+          },
         )),
       ),
       floatingActionButton: FloatingActionButton(
@@ -47,12 +50,3 @@ class HomeScreen extends StatelessWidget {
     );
   }
 }
-
-/*Navigator.pushNamed(
-      context,
-      ExtractArgumentsScreen.routeName,
-      arguments: ScreenArguments(
-        'Extract Arguments Screen',
-        'This message is extracted in the build method.',
-      ),
-    );*/

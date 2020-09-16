@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
-// import 'package:my_list_score/presentation/for_passing.dart';
 import 'package:my_list_score/presentation/home_screen.dart';
 import 'package:my_list_score/presentation/edit.dart';
 import 'package:my_list_score/presentation/show_score.dart';
@@ -18,7 +17,7 @@ class MyApp extends StatelessWidget {
       routes: {
         AppRoutes.home: (context) => HomeScreen(),
         // AppRoutes.edit: (context) => Edit(),
-        AppRoutes.showScore: (context) => ShowScore(),
+        // AppRoutes.showScore: (context) => ShowScore(),
       },
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
@@ -35,6 +34,15 @@ Route _registerRouteWithParameters(RouteSettings settings) {
       return Edit(
         name: person.name,
         score: person.score.toString(),
+      );
+    });
+  }
+  if (settings.name == AppRoutes.showScore) {
+    return MaterialPageRoute(builder: (context) {
+      Person clickedAndNext = settings.arguments;
+      return ShowScore(
+        name: clickedAndNext.name,
+        score: clickedAndNext.score.toString(),
       );
     });
   }
