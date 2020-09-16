@@ -3,16 +3,17 @@ import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
 
 class Numpad extends StatefulWidget {
-  Numpad({Key key}) : super(key: key);
+  final String score;
+  Numpad({Key key, @required this.score}) : super(key: key);
 
   @override
-  _NumpadState createState() => _NumpadState();
+  _NumpadState createState() => _NumpadState(this.score);
 }
 
 class _NumpadState extends State<Numpad> {
-  String score = '';
+  String score;
   String max = "9999";
-  // String name = store.get("name");
+  _NumpadState(this.score);
 
   setValue(String val) {
     setState(() {
@@ -172,14 +173,17 @@ class NumpadButton extends StatelessWidget {
 }
 
 class NameTextFormField extends StatefulWidget {
-  NameTextFormField({Key key}) : super(key: key);
+  final String name;
+  NameTextFormField({Key key, @required this.name}) : super(key: key);
 
   @override
-  _NameTextFormFieldState createState() => _NameTextFormFieldState();
+  _NameTextFormFieldState createState() => _NameTextFormFieldState(this.name);
 }
 
 class _NameTextFormFieldState extends State<NameTextFormField> {
-  final controller = TextEditingController();
+  String name;
+  TextEditingController controller;
+  _NameTextFormFieldState(this.name);
 
   setName() {
     store.set("name", controller.text);
@@ -188,7 +192,9 @@ class _NameTextFormFieldState extends State<NameTextFormField> {
   @override
   void initState() {
     super.initState();
+    controller = TextEditingController(text: this.name);
     controller.addListener(setName);
+    print(name);
   }
 
   @override

@@ -2,9 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
 
 class Person {
-  final String _name;
-  final int _score;
-  Person(this._name, this._score);
+  final String name;
+  final int score;
+  Person(this.name, this.score);
 }
 
 class HomeScreen extends StatelessWidget {
@@ -25,11 +25,11 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) => Card(
             child: ListTile(
           title: Text(
-            people[index]._name,
+            people[index].name,
             style: TextStyle(fontSize: 22.0),
           ),
           trailing: Text(
-            people[index]._score.toString(),
+            people[index].score.toString(),
             textScaleFactor: 2.0,
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
@@ -37,10 +37,22 @@ class HomeScreen extends StatelessWidget {
         )),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () => {Navigator.of(context).pushNamed(AppRoutes.edit)},
+        onPressed: () => {
+          Navigator.of(context)
+              .pushNamed(AppRoutes.edit, arguments: Person('', 0))
+        },
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ),
     );
   }
 }
+
+/*Navigator.pushNamed(
+      context,
+      ExtractArgumentsScreen.routeName,
+      arguments: ScreenArguments(
+        'Extract Arguments Screen',
+        'This message is extracted in the build method.',
+      ),
+    );*/

@@ -3,7 +3,15 @@ import 'package:flutter/material.dart';
 import 'package:my_list_score/presentation/numpad.dart';
 
 class Edit extends StatelessWidget {
-  final TextEditingController nameTextfieldController = TextEditingController();
+  final String name;
+  final String score;
+
+  const Edit({
+    Key key,
+    @required this.name,
+    @required this.score,
+  }) : super(key: key);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +28,8 @@ class Edit extends StatelessWidget {
                   textScaleFactor: 2.0,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                 ),
-                NameTextFormField()
+                NameTextFormField(name: this.name)
+                // NameTextFormField()
               ],
             ),
             // SizedBox(
@@ -36,8 +45,8 @@ class Edit extends StatelessWidget {
             //     ),
             //   ),
             // ),
-            // Numpad(name: nameTextfieldController.text)
-            Numpad()
+            // Numpad()
+            Numpad(score: this.score)
           ],
         ),
       ),

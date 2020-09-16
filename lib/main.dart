@@ -17,24 +17,25 @@ class MyApp extends StatelessWidget {
       title: 'MyList App',
       routes: {
         AppRoutes.home: (context) => HomeScreen(),
-        AppRoutes.edit: (context) => Edit(),
+        // AppRoutes.edit: (context) => Edit(),
         AppRoutes.showScore: (context) => ShowScore(),
       },
       theme: ThemeData(
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      // onGenerateRoute: _registerRouteWithParameters,
+      onGenerateRoute: _registerRouteWithParameters,
     );
   }
 }
 
-// Route _registerRouteWithParameters(RouteSettings settings) {
-//   if (settings.name == AppRoutes.edit) {
-//     return MaterialPageRoute(builder: (context) {
-//       ForDisplay parameter = settings.arguments;
-//       return PageDisplayText(
-//         title: parameter.text,
-//       );
-//     });
-//   }
-// }
+Route _registerRouteWithParameters(RouteSettings settings) {
+  if (settings.name == AppRoutes.edit) {
+    return MaterialPageRoute(builder: (context) {
+      Person person = settings.arguments;
+      return Edit(
+        name: person.name,
+        score: person.score.toString(),
+      );
+    });
+  }
+}
