@@ -12,7 +12,7 @@ class Numpad extends StatefulWidget {
 class _NumpadState extends State<Numpad> {
   String score = '';
   String max = "9999";
-  String name = 'eee';
+  // String name = store.get("name");
 
   setValue(String val) {
     setState(() {
@@ -37,7 +37,7 @@ class _NumpadState extends State<Numpad> {
         return AlertDialog(
           title: Text("Data Saved!"),
           content: Text(
-            "Name: " + this.name + "   Score: " + this.score,
+            "Name: " + store.get("name") + "    Score: " + this.score,
             textAlign: TextAlign.center,
           ),
           actions: <Widget>[
@@ -142,6 +142,7 @@ class _NumpadState extends State<Numpad> {
                     ),
                   ],
                 ),
+                // Text(store.get("name"), style: TextStyle(fontSize: 20))
               ],
             ),
           )
@@ -169,3 +170,54 @@ class NumpadButton extends StatelessWidget {
     );
   }
 }
+
+class NameTextFormField extends StatefulWidget {
+  NameTextFormField({Key key}) : super(key: key);
+
+  @override
+  _NameTextFormFieldState createState() => _NameTextFormFieldState();
+}
+
+class _NameTextFormFieldState extends State<NameTextFormField> {
+  final controller = TextEditingController();
+
+  setName() {
+    store.set("name", controller.text);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    controller.addListener(setName);
+  }
+
+  @override
+  void dispose() {
+    controller.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+        width: 200,
+        child: TextFormField(
+          controller: controller,
+          onChanged: setName(),
+          textAlign: TextAlign.center,
+          style: TextStyle(fontSize: 30),
+        ));
+  }
+}
+
+class GlobalState {
+  final Map<String, String> _data = <String, String>{};
+
+  static GlobalState instance = GlobalState._();
+  GlobalState._();
+
+  set(String key, String value) => _data[key] = value;
+  get(String key) => _data[key];
+}
+
+final GlobalState store = GlobalState.instance;
