@@ -10,31 +10,17 @@ class Person {
 
 List<Person> people = [
   Person("Em", 100),
+  Person("Leo", 75),
   Person("Aff", 90),
-  Person("Yong", 80),
-  Person("Leo", 75)
+  Person("Yong", 80)
 ];
 
 class HomeScreen extends StatelessWidget {
-  List<Person> sortPeople(Person personToShow) {
-    List<Person> sortedPeople = people;
-    List<Person> toShow;
-    sortedPeople.sort((current, next) => current.score.compareTo(next.score));
-    int curIdx = sortedPeople.indexOf(personToShow);
-    int nextIdx = curIdx + 1;
-
-    if (nextIdx < sortedPeople.length)
-      toShow = [sortedPeople[curIdx], sortedPeople[nextIdx]];
-    else
-      toShow = [sortedPeople[curIdx], null];
-
-    return toShow;
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        leading: Icon(Icons.menu),
         title: Text("My List"),
       ),
       body: ListView.builder(
@@ -42,7 +28,7 @@ class HomeScreen extends StatelessWidget {
         itemBuilder: (context, index) => Card(
             child: ListTile(
           title: Text(
-            people[index].name,
+            (index + 1).toString() + "  " + people[index].name,
             style: TextStyle(fontSize: 22.0),
           ),
           trailing: Text(
@@ -51,8 +37,8 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           onTap: () => {
-            Navigator.of(context).pushNamed(AppRoutes.showScore,
-                arguments: sortPeople(people[index]))
+            Navigator.of(context)
+                .pushNamed(AppRoutes.showScore, arguments: people[index])
           },
         )),
       ),

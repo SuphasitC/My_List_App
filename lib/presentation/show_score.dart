@@ -2,18 +2,49 @@ import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
 import 'package:my_list_score/presentation/home_screen.dart';
 
-class ShowScore extends StatelessWidget {
-  final List<Person> people;
-  ShowScore(this.people);
+Person nextPerson(Person current) {
+  List<Person> greaterThanCurrent = [];
+  int min = 10000;
+  people.forEach((element) => {
+        if (element.score > current.score) {greaterThanCurrent.add(element)}
+      });
+  for (int i = 0; i < greaterThanCurrent.length; i++) {
+    if (greaterThanCurrent[i].score < min) min = greaterThanCurrent[i].score;
+  }
+  for (int i = 0; i < people.length; i++) {
+    if (people[i].score == min) return people[i];
+  }
+  return null;
+}
+
+class ShowScore extends StatefulWidget {
+  final Person person;
+  ShowScore(this.person);
+
+  @override
+  _ShowScoreState createState() => _ShowScoreState(this.person);
+}
+
+class _ShowScoreState extends State<ShowScore> {
+  final Person person;
+  Person next;
+  _ShowScoreState(this.person);
+
+  @override
+  void initState() {
+    super.initState();
+    next = nextPerson(person);
+  }
 
   @override
   Widget build(BuildContext context) {
+    // print("IN: " + this.people[0].runtimeType.toString());
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.edit),
           onPressed: () => {
             Navigator.of(context)
-                .pushNamed(AppRoutes.edit, arguments: this.people[0])
+                .pushNamed(AppRoutes.edit, arguments: this.person)
           },
           backgroundColor: Colors.orange,
         ),
@@ -30,7 +61,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       left: 30,
                       bottom: 30,
-                      child: Text(this.people[0].name,
+                      child: Text(this.person.name,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,
@@ -39,7 +70,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       right: 30,
                       bottom: 30,
-                      child: Text(this.people[0].score.toString(),
+                      child: Text(this.person.score.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,
@@ -61,11 +92,11 @@ class ShowScore extends StatelessWidget {
                             fontSize: 40.0,
                           )),
                     ),
-                    this.people[1] != null
+                    this.next != null
                         ? Positioned(
                             left: 30,
                             bottom: 30,
-                            child: Text(this.people[1].name,
+                            child: Text(this.next.name,
                                 style: TextStyle(
                                     fontSize: 40.0,
                                     fontWeight: FontWeight.bold)))
@@ -77,8 +108,8 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                         right: 30,
                         bottom: 30,
-                        child: this.people[1] != null
-                            ? Text(this.people[1].score.toString(),
+                        child: this.next != null
+                            ? Text(this.next.score.toString(),
                                 style: TextStyle(
                                     fontSize: 40.0,
                                     fontWeight: FontWeight.bold))
