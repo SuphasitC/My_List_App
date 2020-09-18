@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:my_list_score/presentation/home_screen.dart';
+import 'package:my_list_score/presentation/person.dart';
+import 'package:my_list_score/presentation/global_storage.dart';
 
 class NameTextFormField extends StatefulWidget {
   final Person person;
@@ -44,15 +45,3 @@ class _NameTextFormFieldState extends State<NameTextFormField> {
         ));
   }
 }
-
-class GlobalState {
-  final Map<String, String> _data = <String, String>{};
-
-  static GlobalState instance = GlobalState._();
-  GlobalState._();
-
-  set(String key, String value) => _data[key] = value;
-  get(String key) => _data[key];
-}
-
-final GlobalState store = GlobalState.instance;

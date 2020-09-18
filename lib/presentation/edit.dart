@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:my_list_score/presentation/numpad.dart';
-import 'package:my_list_score/presentation/home_screen.dart';
+import 'package:my_list_score/presentation/person.dart';
 import 'package:my_list_score/presentation/text_form_field.dart';
 
 class Edit extends StatelessWidget {

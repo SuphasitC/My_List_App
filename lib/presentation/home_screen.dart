@@ -1,19 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
-import 'package:my_list_score/presentation/text_form_field.dart';
-
-class Person {
-  final String name;
-  int score;
-  Person(this.name, this.score);
-}
-
-List<Person> people = [
-  Person("Em", 100),
-  Person("Leo", 75),
-  Person("Aff", 90),
-  Person("Yong", 80)
-];
+import 'package:my_list_score/presentation/global_storage.dart';
+import 'package:my_list_score/presentation/person.dart';
 
 class HomeScreen extends StatelessWidget {
   @override

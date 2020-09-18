@@ -3,6 +3,7 @@ import 'package:my_list_score/config/routes.dart';
 import 'package:my_list_score/presentation/home_screen.dart';
 import 'package:my_list_score/presentation/edit.dart';
 import 'package:my_list_score/presentation/show_score.dart';
+import 'package:my_list_score/presentation/person.dart';
 
 void main() {
   runApp(MyApp());

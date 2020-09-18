@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
-import 'package:my_list_score/presentation/home_screen.dart';
-import 'package:my_list_score/presentation/text_form_field.dart';
+import 'package:my_list_score/presentation/person.dart';
+import 'package:my_list_score/presentation/global_storage.dart';
 
 class Numpad extends StatefulWidget {
   final Person person;
