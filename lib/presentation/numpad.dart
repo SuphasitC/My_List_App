@@ -1,19 +1,28 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
+import 'package:my_list_score/presentation/home_screen.dart';
+import 'package:my_list_score/presentation/text_form_field.dart';
 
 class Numpad extends StatefulWidget {
-  final String score;
-  Numpad({Key key, @required this.score}) : super(key: key);
+  final Person person;
+  Numpad(this.person);
 
   @override
-  _NumpadState createState() => _NumpadState(this.score);
+  _NumpadState createState() => _NumpadState(this.person);
 }
 
 class _NumpadState extends State<Numpad> {
+  Person person;
   String score;
   String max = "9999";
-  _NumpadState(this.score);
+  _NumpadState(this.person);
+
+  @override
+  void initState() {
+    super.initState();
+    score = this.person.score.toString();
+  }
 
   setValue(String val) {
     setState(() {
@@ -32,6 +41,18 @@ class _NumpadState extends State<Numpad> {
   }
 
   dataSave() {
+    int foundIdx = -1;
+    for (int i = 0; i < people.length; i++) {
+      if (people[i].name == store.get("name")) {
+        foundIdx = i;
+        break;
+      }
+    }
+    print("foundIdx = " + foundIdx.toString());
+    if (foundIdx == -1) {
+      people.add(Person(store.get("name"), int.parse(this.score)));
+    } else
+      people[foundIdx].score = int.parse(this.score);
     showDialog(
       context: context,
       builder: (BuildContext context) {
@@ -56,7 +77,7 @@ class _NumpadState extends State<Numpad> {
   @override
   Widget build(BuildContext context) {
     return Column(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
           SizedBox(
             width: 500.0,
@@ -171,59 +192,3 @@ class NumpadButton extends StatelessWidget {
     );
   }
 }
-
-class NameTextFormField extends StatefulWidget {
-  final String name;
-  NameTextFormField({Key key, @required this.name}) : super(key: key);
-
-  @override
-  _NameTextFormFieldState createState() => _NameTextFormFieldState(this.name);
-}
-
-class _NameTextFormFieldState extends State<NameTextFormField> {
-  String name;
-  TextEditingController controller;
-  _NameTextFormFieldState(this.name);
-
-  setName() {
-    store.set("name", controller.text);
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    controller = TextEditingController(text: this.name);
-    controller.addListener(setName);
-    print(name);
-  }
-
-  @override
-  void dispose() {
-    controller.dispose();
-    super.dispose();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-        width: 200,
-        child: TextFormField(
-          controller: controller,
-          onChanged: setName(),
-          textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 30),
-        ));
-  }
-}
-
-class GlobalState {
-  final Map<String, String> _data = <String, String>{};
-
-  static GlobalState instance = GlobalState._();
-  GlobalState._();
-
-  set(String key, String value) => _data[key] = value;
-  get(String key) => _data[key];
-}
-
-final GlobalState store = GlobalState.instance;

@@ -1,16 +1,11 @@
 import 'package:flutter/material.dart';
-// import 'package:my_list_score/config/routes.dart';
 import 'package:my_list_score/presentation/numpad.dart';
+import 'package:my_list_score/presentation/home_screen.dart';
+import 'package:my_list_score/presentation/text_form_field.dart';
 
 class Edit extends StatelessWidget {
-  final String name;
-  final String score;
-
-  const Edit({
-    Key key,
-    @required this.name,
-    @required this.score,
-  }) : super(key: key);
+  final Person person;
+  Edit(this.person);
 
   @override
   Widget build(BuildContext context) {
@@ -28,25 +23,10 @@ class Edit extends StatelessWidget {
                   textScaleFactor: 2.0,
                   style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
                 ),
-                NameTextFormField(name: this.name)
-                // NameTextFormField()
+                NameTextFormField(this.person)
               ],
             ),
-            // SizedBox(
-            //   width: 500.0,
-            //   height: 70.0,
-            //   child: ColoredBox(
-            //     color: Colors.blue[300],
-            //     child: Text(
-            //       '80',
-            //       textScaleFactor: 3.0,
-            //       textAlign: TextAlign.center,
-            //       style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            //     ),
-            //   ),
-            // ),
-            // Numpad()
-            Numpad(score: this.score)
+            Numpad(this.person)
           ],
         ),
       ),

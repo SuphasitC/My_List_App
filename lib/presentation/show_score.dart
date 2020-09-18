@@ -3,26 +3,18 @@ import 'package:my_list_score/config/routes.dart';
 import 'package:my_list_score/presentation/home_screen.dart';
 
 class ShowScore extends StatelessWidget {
-  final String name;
-  final String score;
-  const ShowScore({
-    Key key,
-    @required this.name,
-    @required this.score,
-  }) : super(key: key);
+  final Person person;
+  ShowScore(this.person);
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        floatingActionButton: Padding(
-          padding: const EdgeInsets.only(top: 120.0),
-          child: FloatingActionButton(
-            child: Icon(Icons.edit),
-            onPressed: () => {
-              Navigator.of(context).pushNamed(AppRoutes.edit,
-                  arguments: Person(this.name, int.parse(score)))
-            },
-            backgroundColor: Colors.orange,
-          ),
+        floatingActionButton: FloatingActionButton(
+          child: Icon(Icons.edit),
+          onPressed: () => {
+            Navigator.of(context)
+                .pushNamed(AppRoutes.edit, arguments: this.person)
+          },
+          backgroundColor: Colors.orange,
         ),
         floatingActionButtonLocation: FloatingActionButtonLocation.endTop,
         body: Column(
@@ -37,7 +29,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       left: 30,
                       bottom: 30,
-                      child: Text(this.name,
+                      child: Text(this.person.name,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,
@@ -46,7 +38,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       right: 30,
                       bottom: 30,
-                      child: Text(this.score,
+                      child: Text(this.person.score.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,

@@ -1,19 +1,21 @@
 import 'package:flutter/material.dart';
 import 'package:my_list_score/config/routes.dart';
+import 'package:my_list_score/presentation/text_form_field.dart';
 
 class Person {
   final String name;
-  final int score;
+  int score;
   Person(this.name, this.score);
 }
 
+List<Person> people = [
+  Person("Em", 100),
+  Person("Aff", 90),
+  Person("Yong", 80),
+  Person("Leo", 75)
+];
+
 class HomeScreen extends StatelessWidget {
-  final List<Person> people = [
-    Person("Em", 100),
-    Person("Aff", 90),
-    Person("Yong", 80),
-    Person("Leo", 75)
-  ];
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -41,10 +43,11 @@ class HomeScreen extends StatelessWidget {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () => {
+          store.set("name", ''),
           Navigator.of(context)
               .pushNamed(AppRoutes.edit, arguments: Person('', 0))
         },
-        tooltip: 'Increment',
+        tooltip: 'Add Person',
         child: Icon(Icons.add),
       ),
     );
