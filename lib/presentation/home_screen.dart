@@ -16,6 +16,21 @@ List<Person> people = [
 ];
 
 class HomeScreen extends StatelessWidget {
+  List<Person> sortPeople(Person personToShow) {
+    List<Person> sortedPeople = people;
+    List<Person> toShow;
+    sortedPeople.sort((current, next) => current.score.compareTo(next.score));
+    int curIdx = sortedPeople.indexOf(personToShow);
+    int nextIdx = curIdx + 1;
+
+    if (nextIdx < sortedPeople.length)
+      toShow = [sortedPeople[curIdx], sortedPeople[nextIdx]];
+    else
+      toShow = [sortedPeople[curIdx], null];
+
+    return toShow;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -36,8 +51,8 @@ class HomeScreen extends StatelessWidget {
             style: TextStyle(fontWeight: FontWeight.bold),
           ),
           onTap: () => {
-            Navigator.of(context)
-                .pushNamed(AppRoutes.showScore, arguments: people[index])
+            Navigator.of(context).pushNamed(AppRoutes.showScore,
+                arguments: sortPeople(people[index]))
           },
         )),
       ),

@@ -3,8 +3,9 @@ import 'package:my_list_score/config/routes.dart';
 import 'package:my_list_score/presentation/home_screen.dart';
 
 class ShowScore extends StatelessWidget {
-  final Person person;
-  ShowScore(this.person);
+  final List<Person> people;
+  ShowScore(this.people);
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -12,7 +13,7 @@ class ShowScore extends StatelessWidget {
           child: Icon(Icons.edit),
           onPressed: () => {
             Navigator.of(context)
-                .pushNamed(AppRoutes.edit, arguments: this.person)
+                .pushNamed(AppRoutes.edit, arguments: this.people[0])
           },
           backgroundColor: Colors.orange,
         ),
@@ -29,7 +30,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       left: 30,
                       bottom: 30,
-                      child: Text(this.person.name,
+                      child: Text(this.people[0].name,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,
@@ -38,7 +39,7 @@ class ShowScore extends StatelessWidget {
                     Positioned(
                       right: 30,
                       bottom: 30,
-                      child: Text(this.person.score.toString(),
+                      child: Text(this.people[0].score.toString(),
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,
@@ -58,23 +59,30 @@ class ShowScore extends StatelessWidget {
                           textAlign: TextAlign.center,
                           style: TextStyle(
                             fontSize: 40.0,
-                            /*fontWeight: FontWeight.bold*/
                           )),
                     ),
+                    this.people[1] != null
+                        ? Positioned(
+                            left: 30,
+                            bottom: 30,
+                            child: Text(this.people[1].name,
+                                style: TextStyle(
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.bold)))
+                        : Positioned.fill(
+                            top: 120,
+                            child: Text("There's no one get higher score.",
+                                textAlign: TextAlign.center,
+                                style: TextStyle(fontSize: 20.0))),
                     Positioned(
-                      left: 30,
-                      bottom: 30,
-                      child: Text('1  Em',
-                          style: TextStyle(
-                              fontSize: 40.0, fontWeight: FontWeight.bold)),
-                    ),
-                    Positioned(
-                      right: 30,
-                      bottom: 30,
-                      child: Text('100',
-                          style: TextStyle(
-                              fontSize: 40.0, fontWeight: FontWeight.bold)),
-                    )
+                        right: 30,
+                        bottom: 30,
+                        child: this.people[1] != null
+                            ? Text(this.people[1].score.toString(),
+                                style: TextStyle(
+                                    fontSize: 40.0,
+                                    fontWeight: FontWeight.bold))
+                            : Text(''))
                   ],
                 )),
           ],
