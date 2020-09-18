@@ -29,13 +29,11 @@ Route _registerRouteWithParameters(RouteSettings settings) {
   Person person = settings.arguments;
   if (settings.name == AppRoutes.edit) {
     return MaterialPageRoute(builder: (context) {
-      // Person person = settings.arguments;
       return Edit(person);
     });
   }
   if (settings.name == AppRoutes.showScore) {
     return MaterialPageRoute(builder: (context) {
-      // List<Person> clickedAndNext = settings.arguments;
       return ShowScore(person);
     });
   }

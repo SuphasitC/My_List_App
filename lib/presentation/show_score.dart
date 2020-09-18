@@ -36,9 +36,12 @@ class _ShowScoreState extends State<ShowScore> {
     next = nextPerson(person);
   }
 
+  int idxOfPerson(Person person) {
+    return people.indexOf(person) + 1;
+  }
+
   @override
   Widget build(BuildContext context) {
-    // print("IN: " + this.people[0].runtimeType.toString());
     return Scaffold(
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.edit),
@@ -61,7 +64,10 @@ class _ShowScoreState extends State<ShowScore> {
                     Positioned(
                       left: 30,
                       bottom: 30,
-                      child: Text(this.person.name,
+                      child: Text(
+                          idxOfPerson(this.person).toString() +
+                              ".  " +
+                              this.person.name,
                           style: TextStyle(
                               color: Colors.white,
                               fontSize: 40.0,
@@ -96,7 +102,10 @@ class _ShowScoreState extends State<ShowScore> {
                         ? Positioned(
                             left: 30,
                             bottom: 30,
-                            child: Text(this.next.name,
+                            child: Text(
+                                idxOfPerson(next).toString() +
+                                    ".  " +
+                                    this.next.name,
                                 style: TextStyle(
                                     fontSize: 40.0,
                                     fontWeight: FontWeight.bold)))

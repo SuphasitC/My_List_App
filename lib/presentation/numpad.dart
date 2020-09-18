@@ -79,11 +79,11 @@ class _NumpadState extends State<Numpad> {
     return Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: <Widget>[
-          SizedBox(
-            width: 500.0,
-            height: 70.0,
-            child: ColoredBox(
-              color: Colors.blue[300],
+          Padding(
+            padding: EdgeInsets.only(bottom: 50),
+            child: Container(
+              color: Colors.blue,
+              alignment: Alignment.topCenter,
               child: Text(
                 this.score,
                 textScaleFactor: 3.0,
@@ -164,7 +164,6 @@ class _NumpadState extends State<Numpad> {
                     ),
                   ],
                 ),
-                // Text(store.get("name"), style: TextStyle(fontSize: 20))
               ],
             ),
           )
