@@ -43,6 +43,7 @@ class _ShowScoreState extends State<ShowScore> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+        backgroundColor: Colors.black,
         floatingActionButton: FloatingActionButton(
           child: Icon(Icons.edit),
           onPressed: () => {
@@ -85,44 +86,103 @@ class _ShowScoreState extends State<ShowScore> {
                   ],
                 )),
             Container(
-                height: 200,
-                color: Colors.grey[200],
+                padding: EdgeInsets.all(10),
                 alignment: Alignment.bottomCenter,
-                child: Stack(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    Positioned.fill(
-                      top: 30,
-                      child: Text('Next Person >',
-                          textAlign: TextAlign.center,
-                          style: TextStyle(
-                            fontSize: 40.0,
-                          )),
+                    Card(
+                      color: Colors.grey,
+                      child: ListTile(
+                        title: Center(
+                          child: Text(
+                            "Next Person >",
+                            style: TextStyle(
+                                fontSize: 30.0, fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                        onTap: () => {
+                          setState(() {
+                            next = nextPerson(next);
+                          })
+                        },
+                      ),
                     ),
-                    this.next != null
-                        ? Positioned(
-                            left: 30,
-                            bottom: 30,
-                            child: Text(
-                                idxOfPerson(next).toString() +
-                                    ".  " +
-                                    this.next.name,
-                                style: TextStyle(
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.bold)))
-                        : Positioned.fill(
-                            top: 120,
-                            child: Text("There's no one get higher score.",
-                                textAlign: TextAlign.center,
-                                style: TextStyle(fontSize: 20.0))),
-                    Positioned(
-                        right: 30,
-                        bottom: 30,
-                        child: this.next != null
-                            ? Text(this.next.score.toString(),
-                                style: TextStyle(
-                                    fontSize: 40.0,
-                                    fontWeight: FontWeight.bold))
-                            : Text(''))
+                    Container(
+                      height: 110,
+                      padding: EdgeInsets.all(20.0),
+                      color: Colors.blue,
+                      child: this.next != null
+                          ? Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                  Text(
+                                      idxOfPerson(next).toString() +
+                                          ".  " +
+                                          this.next.name,
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                          shadows: [
+                                            Shadow(
+                                                offset: Offset(-1.5, -1.5),
+                                                color: Colors.black),
+                                            Shadow(
+                                                offset: Offset(1.5, -1.5),
+                                                color: Colors.black),
+                                            Shadow(
+                                                offset: Offset(1.5, 1.5),
+                                                color: Colors.black),
+                                            Shadow(
+                                                offset: Offset(-1.5, 1.5),
+                                                color: Colors.black),
+                                          ],
+                                          fontSize: 35.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                  Text(
+                                      this.next != null
+                                          ? this.next.score.toString()
+                                          : "",
+                                      style: TextStyle(
+                                          shadows: [
+                                            Shadow(
+                                                offset: Offset(-1.5, -1.5),
+                                                color: Colors.black),
+                                            Shadow(
+                                                offset: Offset(1.5, -1.5),
+                                                color: Colors.black),
+                                            Shadow(
+                                                offset: Offset(1.5, 1.5),
+                                                color: Colors.black),
+                                            Shadow(
+                                                offset: Offset(-1.5, 1.5),
+                                                color: Colors.black),
+                                          ],
+                                          fontSize: 40.0,
+                                          fontWeight: FontWeight.bold,
+                                          color: Colors.white)),
+                                ])
+                          : Text("There's no one get higher score than me",
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                  shadows: [
+                                    Shadow(
+                                        offset: Offset(-1.5, -1.5),
+                                        color: Colors.black),
+                                    Shadow(
+                                        offset: Offset(1.5, -1.5),
+                                        color: Colors.black),
+                                    Shadow(
+                                        offset: Offset(1.5, 1.5),
+                                        color: Colors.black),
+                                    Shadow(
+                                        offset: Offset(-1.5, 1.5),
+                                        color: Colors.black),
+                                  ],
+                                  fontSize: 35.0,
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.white)),
+                    )
                   ],
                 )),
           ],

@@ -181,12 +181,12 @@ class NumpadButton extends StatelessWidget {
     return Container(
       padding: EdgeInsets.symmetric(vertical: 5.0),
       child: OutlineButton(
-        borderSide: BorderSide(color: Colors.black),
+        // borderSide: BorderSide(color: Colors.white),
         padding: EdgeInsets.all(30.0),
         onPressed: onPressed,
         shape: CircleBorder(),
         child: Text(this.text,
-            style: TextStyle(fontSize: 22.0, color: Colors.black)),
+            style: TextStyle(fontSize: 30.0, color: Colors.white)),
       ),
     );
   }

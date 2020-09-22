@@ -19,6 +19,7 @@ class MyApp extends StatelessWidget {
         AppRoutes.home: (context) => HomeScreen(),
       },
       theme: ThemeData(
+        fontFamily: 'NeutraText',
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       onGenerateRoute: _registerRouteWithParameters,
@@ -38,4 +39,5 @@ Route _registerRouteWithParameters(RouteSettings settings) {
       return ShowScore(person);
     });
   }
+  return null;
 }

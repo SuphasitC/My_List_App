@@ -38,10 +38,20 @@ class _NameTextFormFieldState extends State<NameTextFormField> {
     return SizedBox(
         width: 200,
         child: TextFormField(
+          maxLength: 10,
           controller: controller,
           onChanged: setName(),
           textAlign: TextAlign.center,
-          style: TextStyle(fontSize: 30),
+          style: TextStyle(
+            fontSize: 30,
+            color: Colors.black,
+          ),
+          decoration: InputDecoration(
+            filled: true,
+            fillColor: Colors.white,
+            border:
+                OutlineInputBorder(borderSide: BorderSide(color: Colors.teal)),
+          ),
         ));
   }
 }

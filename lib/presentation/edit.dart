@@ -10,6 +10,8 @@ class Edit extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
+      // backgroundColor: Colors.white,
       resizeToAvoidBottomPadding: false,
       body: Center(
         child: Column(
@@ -19,9 +21,12 @@ class Edit extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: <Widget>[
                 Text(
-                  "Name",
+                  "Name  :",
                   textScaleFactor: 2.0,
-                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0),
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                      fontSize: 20.0),
                 ),
                 NameTextFormField(this.person)
               ],
